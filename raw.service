@@ -1,0 +1,14 @@
+[Unit]
+Description=raw.gm-lang.org service
+After=network.target
+
+[Service]
+Environment="gmraw=/home/giacomo/docs/raw"
+
+Type=simple
+Restart=no
+User=giacomo
+ExecStart=/usr/bin/python3 /home/giacomo/docs/index.py
+
+[Install]
+WantedBy=multi-user.target
