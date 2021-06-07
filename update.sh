@@ -1,11 +1,11 @@
-cd ~/raw.gm-lang.org
+cd /home/giacomo/raw.gm-lang.org
 git pull
 
-cd ~/raw.gm-lang.org/raw/gm
+cd /home/giacomo/raw.gm-lang.org/raw/gm
 git pull
 
-sudo cp /home/giacomo/raw.gm-lang.org/raw.service /etc/systemd/system/raw.service
+cp /home/giacomo/raw.gm-lang.org/raw.service /etc/systemd/system/raw.service
 
-sudo systemctl daemon-reload
-sudo systemctl restart raw
-sudo systemctl status raw
+systemctl daemon-reload
+systemctl restart raw
+systemctl status raw
