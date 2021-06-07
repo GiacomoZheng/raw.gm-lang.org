@@ -1,8 +1,5 @@
 #! python3
 # coding:utf-8
-# gmraw=/home/giacomo/docs/raw
-
-# static=/mnt/c/Users/giaco/Documents/GitHub/doc.gm-lang.org/static gmraw=/mnt/c/Users/giaco/Documents/GitHub gmsrc=/mnt/c/Users/giaco/Documents/GitHub/doc.gm-lang.org/src
 
 from tornado.ioloop import IOLoop
 from tornado.web import RequestHandler, Application
@@ -57,7 +54,7 @@ class RawHandler(RequestHandler):
 
 def make_app():
 	return Application(handlers=[
-		(r"/raw/([\w-][\.\w-]*)", RawHandler),
+		(r"/([\w-][\.\w-]*)", RawHandler),
 	])
 
 if __name__ == "__main__":
