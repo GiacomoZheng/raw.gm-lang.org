@@ -1,6 +1,9 @@
 #! python3
 # coding:utf-8
 
+# gmraw=/home/giacomo/raw.gm-lang.org/raw
+# gmraw=/mnt/c/Users/giacomo/Documents/GitHub
+
 from tornado.ioloop import IOLoop
 from tornado.web import RequestHandler, Application
 
