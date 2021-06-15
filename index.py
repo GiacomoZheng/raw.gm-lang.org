@@ -55,9 +55,19 @@ class RawHandler(RequestHandler):
 		except Exception as e:
 			self.write(str(e))
 
+class TimeHandler(RequestHandler):
+	def get(self, title : str):
+		try:
+			self.write(
+				str(os.path.getmtime(analyze(str(title), str(os.environ.get("gmraw")))))
+			)
+		except Exception as e:
+			self.write(str(e))
+
 def make_app():
 	return Application(handlers=[
 		(r"/([\w-][\.\w-]*)", RawHandler),
+		(r"/([\w-][\.\w-]*)/time", TimeHandler),
 	])
 
 if __name__ == "__main__":
