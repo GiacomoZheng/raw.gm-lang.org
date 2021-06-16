@@ -13,8 +13,9 @@ from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments_gm.gm import GMLexer
 
+pwd = os.getcwd()
 if os.environ.get("gmraw") is None:
-	GMRAW = "./raw/" # WARN
+	GMRAW =  + "/raw/" # WARN
 else:
 	GMRAW = os.environ.get("gmraw")
 
@@ -24,7 +25,7 @@ def transparent(s):
 class Unimplement(Exception): pass
 class NoSuchFile(Exception): pass
 
-def analyze(full_name : str, directory = ".", root = ".", file = ".gm", ext = ".gm") -> str:
+def analyze(full_name : str, directory = pwd, root = pwd, file = ".gm", ext = ".gm") -> str:
 	"""
 	"gm.h.group" ⇒ "./gm/h/_/group/.gm" \n
 	"gm.Prolog" ⇒ "./gm/_/_interest_/Prolog"
@@ -62,7 +63,7 @@ class RawHandler(RequestHandler):
 			with open(analyze(str(title), GMRAW), "r") as handle:
 				self.write(handle.read())
 		except Exception as e:
-			raise e
+			# raise e
 			self.write(str(e))
 
 class TimeHandler(RequestHandler):
@@ -72,7 +73,7 @@ class TimeHandler(RequestHandler):
 				str(os.path.getmtime(analyze(str(title), GMRAW)))
 			)
 		except Exception as e:
-			raise e
+			# raise e
 			self.write(str(e))
 
 # for html, I may remove it
@@ -83,7 +84,7 @@ class HtmlHandler(RequestHandler):
 				raw = handle.read()
 			self.write(highlight(raw, GMLexer(), HtmlFormatter()))
 		except Exception as e:
-			raise e
+			# raise e
 			self.write(str(e))
 
 
