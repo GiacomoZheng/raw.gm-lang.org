@@ -1,3 +1,5 @@
+bash backend.py/update.sh
+
 cd /home/giacomo/raw.gm-lang.org
 git pull
 

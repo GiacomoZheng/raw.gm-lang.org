@@ -9,6 +9,8 @@ from tornado.web import RequestHandler, Application
 
 import os
 
+from backend import update
+
 def transparent(s):
 	return s.startswith("_") and s.endswith("_")
 
@@ -64,10 +66,20 @@ class TimeHandler(RequestHandler):
 		except Exception as e:
 			self.write(str(e))
 
+# for html, I may remove it
+class HtmlHandler(RequestHandler):
+	def get(self, title : str):
+		try:
+			self.write(update(title), "localhost:8888/")
+		except Exception as e:
+			self.write(str(e))
+
+
 def make_app():
 	return Application(handlers=[
 		(r"/([\w-][\.\w-]*)", RawHandler),
 		(r"/([\w-][\.\w-]*)/time", TimeHandler),
+		(r"/([\w-][\.\w-]*)/html", HtmlHandler),
 	])
 
 if __name__ == "__main__":
