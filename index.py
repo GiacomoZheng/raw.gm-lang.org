@@ -8,14 +8,17 @@ from tornado.ioloop import IOLoop
 from tornado.web import RequestHandler, Application
 
 import os
+import sys
 
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments_gm.gm import GMLexer
 
-pwd = os.getcwd()
 if os.environ.get("gmraw") is None:
-	GMRAW = os.path.join(pwd, "raw/")
+	if len(sys.argv) > 1:
+		GMRAW = os.path.join(sys.argv[1], "raw/")
+	else:
+		GMRAW = os.path.join(".", "raw/")
 else:
 	GMRAW = os.environ.get("gmraw")
 
@@ -25,7 +28,7 @@ def transparent(s):
 class Unimplement(Exception): pass
 class NoSuchFile(Exception): pass
 
-def analyze(full_name : str, directory = pwd, root = pwd, file = ".gm", ext = ".gm") -> str:
+def analyze(full_name : str, directory : str, root = ".", file = ".gm", ext = ".gm") -> str:
 	"""
 	"gm.h.group" ⇒ "./gm/h/_/group/.gm" \n
 	"gm.Prolog" ⇒ "./gm/_/_interest_/Prolog"
