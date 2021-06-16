@@ -13,11 +13,12 @@ from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments_gm.gm import GMLexer
 
-pwd = os.getcwd()
-if os.environ.get("gmraw") is None:
-	GMRAW = pwd + "raw/" # WARN
-else:
-	GMRAW = os.environ.get("gmraw")
+pwd = os.getcwd() + "/"
+GMRAW = pwd + "raw/" # WARN
+# if os.environ.get("gmraw") is None:
+# 	GMRAW = pwd + "raw/" # WARN
+# else:
+# 	GMRAW = os.environ.get("gmraw")
 
 def transparent(s):
 	return s.startswith("_") and s.endswith("_")
