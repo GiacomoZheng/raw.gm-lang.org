@@ -7,7 +7,7 @@ After=network.target
 Type=simple
 Restart=no
 User=giacomo
-ExecStart=/usr/bin/python3 /home/giacomo/raw.gm-lang.org/index.py
+ExecStart=/usr/bin/python3 /home/giacomo/raw.gm-lang.org/index.py /home/giacomo/raw.gm-lang.org/
 
 [Install]
 WantedBy=multi-user.target

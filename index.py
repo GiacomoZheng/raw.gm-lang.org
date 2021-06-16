@@ -14,11 +14,13 @@ from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments_gm.gm import GMLexer
 
+if len(sys.argv) > 1:
+	ROOT = sys.argv[1]
+else:
+	ROOT = "."
+
 if os.environ.get("gmraw") is None:
-	if len(sys.argv) > 1:
-		GMRAW = os.path.join(sys.argv[1], "raw/")
-	else:
-		GMRAW = os.path.join(".", "raw/")
+	GMRAW = os.path.join(ROOT, "raw/")
 else:
 	GMRAW = os.environ.get("gmraw")
 
@@ -28,7 +30,7 @@ def transparent(s):
 class Unimplement(Exception): pass
 class NoSuchFile(Exception): pass
 
-def analyze(full_name : str, directory : str, root = ".", file = ".gm", ext = ".gm") -> str:
+def analyze(full_name : str, directory : str, root = ROOT, file = ".gm", ext = ".gm") -> str:
 	"""
 	"gm.h.group" ⇒ "./gm/h/_/group/.gm" \n
 	"gm.Prolog" ⇒ "./gm/_/_interest_/Prolog"
