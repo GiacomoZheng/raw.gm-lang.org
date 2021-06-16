@@ -1,9 +1,11 @@
-bash backend.py/update.sh
+# bash backend.py/update.sh
 
 cd /home/giacomo/raw.gm-lang.org
 git pull
 
 cd /home/giacomo/raw.gm-lang.org/raw/gm
+git pull
+cd /home/giacomo/raw.gm-lang.org/pygments_gm
 git pull
 
 cp /home/giacomo/raw.gm-lang.org/raw.service /etc/systemd/system/raw.service

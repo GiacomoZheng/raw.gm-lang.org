@@ -9,7 +9,14 @@ from tornado.web import RequestHandler, Application
 
 import os
 
-from backend import update
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+from pygments_gm.gm import GMLexer
+
+if os.environ.get("gmraw") is None:
+	GMRAW = "./raw/" # WARN
+else:
+	GMRAW = os.environ.get("gmraw")
 
 def transparent(s):
 	return s.startswith("_") and s.endswith("_")
@@ -52,26 +59,31 @@ def analyze(full_name : str, directory = ".", root = ".", file = ".gm", ext = ".
 class RawHandler(RequestHandler):
 	def get(self, title : str):
 		try:
-			with open(analyze(str(title), str(os.environ.get("gmraw"))), "r") as handle:
+			with open(analyze(str(title), GMRAW), "r") as handle:
 				self.write(handle.read())
 		except Exception as e:
+			raise e
 			self.write(str(e))
 
 class TimeHandler(RequestHandler):
 	def get(self, title : str):
 		try:
 			self.write(
-				str(os.path.getmtime(analyze(str(title), str(os.environ.get("gmraw")))))
+				str(os.path.getmtime(analyze(str(title), GMRAW)))
 			)
 		except Exception as e:
+			raise e
 			self.write(str(e))
 
 # for html, I may remove it
 class HtmlHandler(RequestHandler):
 	def get(self, title : str):
 		try:
-			self.write(update(title), "localhost:8888/")
+			with open(analyze(str(title), GMRAW), "r") as handle:
+				raw = handle.read()
+			self.write(highlight(raw, GMLexer(), HtmlFormatter()))
 		except Exception as e:
+			raise e
 			self.write(str(e))
 
 

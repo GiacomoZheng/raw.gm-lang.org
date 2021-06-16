@@ -6,9 +6,9 @@ from urllib.request import urlopen, Request
 import os
 import sys
 
-headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'}
 def url(site):
-	return Request(url=site, headers=headers)
+    headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'}
+    return Request(url=site, headers=headers)
 
 def update(title : str, GMRAW = "https://raw.gm-lang.org/"):
     path_src = "./src_cache/" + str(title) + ".html"
