@@ -66,7 +66,7 @@ class RawHandler(RequestHandler):
 	def get(self, title : str):
 		try:
 			with open(analyze(str(title), GMRAW), "r") as handle:
-				self.write(handle.read())
+				self.write(handle.read().replace("\t", "    ")) # TODO)
 		except Exception as e:
 			# raise e
 			self.write(str(e))
@@ -89,7 +89,7 @@ class HtmlHandler(RequestHandler):
 			path_src = "./src_cache/" + str(title) + ".html"
 			if (not os.path.isfile(path_src)) or (os.path.getmtime(path_src) < os.path.getmtime(path_raw)):
 				with open(path_raw, "r") as handle:
-					raw = handle.read().replace("\t", "    ")
+					raw = handle.read().replace("\t", "    ") # TODO
 				with open(path_src, "w") as handle:
 					handle.write(highlight(raw, GMLexer(), HtmlFormatter(linenos="table")))
 			with open(path_src, "r") as handle:
