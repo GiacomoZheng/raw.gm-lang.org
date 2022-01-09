@@ -1,5 +1,9 @@
 echo "TODO test it"
 
+sudo apt install python3-pip
+python3 -m pip install tornado
+python3 -m pip install pygments
+
 cd /home/giacomo/
 git pull https://github.com/GiacomoZheng/raw.gm-lang.org.git
 
