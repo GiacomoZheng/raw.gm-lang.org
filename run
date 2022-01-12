@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [[ $(pwd) != *raw.gm-lang.org ]]
 then
 	echo "wrong workplace"
@@ -5,7 +7,4 @@ then
 fi
 # root=$(pwd)
 
-rm -rf src_cache
-mkdir src_cache
-
-bash update.sh
+python3 index.py

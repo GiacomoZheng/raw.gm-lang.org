@@ -1,4 +1,4 @@
-# bash backend.py/update.sh
+#!/bin/bash
 
 if [[ $(pwd) != *raw.gm-lang.org ]]
 then

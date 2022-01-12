@@ -9,11 +9,21 @@ then
 fi
 root=$(pwd)
 
+cd $root
 git clone https://github.com/GiacomoZheng/pygments_gm.git
 mkdir src_cache
 mkdir raw
 cd $root/raw
 git clone https://github.com/GiacomoZheng/gm.git
+
+# shebang
+cd $root
+sudo chmod +x start
+sudo chmod +x stop
+sudo chmod +x update
+sudo chmod +x restart
+sudo chmod +x status
+sudo chmod +x run
 
 if [[ $OSTYPE == linux-gnu* ]]
 then 
@@ -22,4 +32,4 @@ then
 fi
 
 cd $root
-bash start.sh
+./start

@@ -1,6 +1,8 @@
+#!/bin/bash
+
 if [[ $OSTYPE == linux-gnu* ]]
 then
-	sudo systemctl start raw
+	sudo systemctl stop raw
 	sleep 1s
 	systemctl status raw
 fi
