@@ -15,11 +15,12 @@ git pull
 cd $root/pygments_gm
 git pull
 
-cp $root/raw.service /etc/systemd/system/raw.service
 
 if [[ $OSTYPE == linux-gnu* ]]
 then 
+	cp $root/raw.service /etc/systemd/system/raw.service
 	systemctl daemon-reload
+	
 	systemctl restart raw
 	sleep 1s
 	systemctl status raw
