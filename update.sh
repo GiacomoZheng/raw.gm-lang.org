@@ -1,15 +1,26 @@
 # bash backend.py/update.sh
 
-cd /home/giacomo/raw.gm-lang.org
+if [[ $(pwd) != *raw.gm-lang.org ]]
+then
+	echo "wrong workplace"
+	exit 0
+fi
+root=$(pwd)
+
 git pull
 
-cd /home/giacomo/raw.gm-lang.org/raw/gm
-git pull
-cd /home/giacomo/raw.gm-lang.org/pygments_gm
+cd $root/raw/gm
 git pull
 
-cp /home/giacomo/raw.gm-lang.org/raw.service /etc/systemd/system/raw.service
+cd $root/pygments_gm
+git pull
 
-systemctl daemon-reload
-systemctl restart raw
-systemctl status raw
+cp $root/raw.service /etc/systemd/system/raw.service
+
+if [[ $OSTYPE == linux-gnu* ]]
+then 
+	systemctl daemon-reload
+	systemctl restart raw
+	sleep 1s
+	systemctl status raw
+fi
