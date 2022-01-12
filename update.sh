@@ -18,10 +18,10 @@ git pull
 
 if [[ $OSTYPE == linux-gnu* ]]
 then 
-	cp $root/raw.service /etc/systemd/system/raw.service
-	systemctl daemon-reload
+	sudo cp $root/raw.service /etc/systemd/system/raw.service
+	sudo systemctl daemon-reload
 	
-	systemctl restart raw
+	sudo systemctl restart raw
 	sleep 1s
 	systemctl status raw
 fi

@@ -1,4 +1,4 @@
-apt install python3-pip
+sudo apt install python3-pip
 python3 -m pip install tornado
 python3 -m pip install pygments
 
@@ -17,8 +17,8 @@ git clone https://github.com/GiacomoZheng/gm.git
 
 if [[ $OSTYPE == linux-gnu* ]]
 then 
-	cp $root/raw.service /etc/systemd/system/raw.service
-	systemctl daemon-reload
+	sudo cp $root/raw.service /etc/systemd/system/raw.service
+	sudo systemctl daemon-reload
 fi
 
 cd $root
