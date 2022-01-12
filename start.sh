@@ -17,7 +17,7 @@ cd /home/giacomo/raw.gm-lang.org/raw
 git clone https://github.com/GiacomoZheng/gm.git
 
 cp /home/giacomo/raw.gm-lang.org/raw.service /etc/systemd/system/raw.service
-
 systemctl daemon-reload
 systemctl start raw
+sleep 1s
 systemctl status raw
