@@ -21,4 +21,5 @@ then
 	systemctl daemon-reload
 fi
 
+cd $root
 bash start.sh
