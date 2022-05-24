@@ -5,6 +5,6 @@ then
 	echo "wrong workplace"
 	exit 0
 fi
-# root=$(pwd)
 
+echo "running as foreground app"
 python3 index.py

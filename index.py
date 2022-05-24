@@ -11,7 +11,7 @@ import sys
 
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
-from pygments_gm.gm import GMLexer
+from pygments_gm import GMLexer
 
 if len(sys.argv) > 1:
 	ROOT = sys.argv[1]

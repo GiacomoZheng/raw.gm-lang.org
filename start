@@ -2,6 +2,8 @@
 
 if [[ $OSTYPE == linux-gnu* ]]
 then
+	echo "running as background service"
+
 	sudo systemctl start raw
 	sleep 1s
 	systemctl status raw
