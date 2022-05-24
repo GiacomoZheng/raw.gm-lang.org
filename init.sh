@@ -13,7 +13,7 @@ cd $root
 if [[ -d pygments_gm ]]
 then
 	cd pygments_gm
-	echo "pygments_gm:"
+	echo ${PWD##*/}:
 	git pull --rebase=false
 	cd $root
 else
@@ -29,7 +29,7 @@ mkdir src_cache
 if [[ -d raw ]]
 then
 	cd $root/raw/gm
-	echo "raw:"
+	echo ${PWD##*/}:
 	git pull --rebase=false
 	cd $root
 else

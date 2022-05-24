@@ -7,12 +7,15 @@ then
 fi
 
 root=$(pwd)
+echo ${PWD##*/}:
 git pull --rebase=false
 
 cd $root/raw/gm
+echo ${PWD##*/}:
 git pull --rebase=false
 
 cd $root/pygments_gm
+echo ${PWD##*/}:
 git pull --rebase=false
 
 
