@@ -14,7 +14,7 @@ if [[ -d pygments_gm ]]
 then
 	cd pygments_gm
 	echo "pygments_gm:"
-	git pull
+	git pull --rebase=false
 	cd $root
 else
 	git clone https://github.com/GiacomoZheng/pygments_gm.git
@@ -30,7 +30,7 @@ if [[ -d raw ]]
 then
 	cd $root/raw/gm
 	echo "raw:"
-	git pull
+	git pull --rebase=false
 	cd $root
 else
 	mkdir raw

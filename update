@@ -5,15 +5,15 @@ then
 	echo "wrong workplace"
 	exit 0
 fi
-root=$(pwd)
 
-git pull
+root=$(pwd)
+git pull --rebase=false
 
 cd $root/raw/gm
-git pull
+git pull --rebase=false
 
 cd $root/pygments_gm
-git pull
+git pull --rebase=false
 
 
 if [[ $OSTYPE == linux-gnu* ]]
