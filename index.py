@@ -2,7 +2,6 @@
 # coding:utf-8
 
 # gmraw=/home/giacomo/raw.gm-lang.org/raw
-# gmraw=/mnt/c/Users/giacomo/Documents/GitHub
 
 from tornado.ioloop import IOLoop
 from tornado.web import RequestHandler, Application
@@ -17,7 +16,7 @@ from pygments_gm.gm import GMLexer
 if len(sys.argv) > 1:
 	ROOT = sys.argv[1]
 else:
-	ROOT = "."
+	ROOT = "./"
 
 if os.environ.get("gmraw") is None:
 	GMRAW = os.path.join(ROOT, "raw/")
@@ -67,7 +66,6 @@ class RawHandler(RequestHandler):
 			with open(analyze(str(title), GMRAW), "r") as handle:
 				self.write(handle.read().replace("\t", "    ")) # TODO)
 		except Exception as e:
-			# raise e
 			self.write(str(e))
 
 class TimeHandler(RequestHandler):
@@ -77,7 +75,6 @@ class TimeHandler(RequestHandler):
 				str(os.path.getmtime(analyze(str(title), GMRAW)))
 			)
 		except Exception as e:
-			# raise e
 			self.write(str(e))
 
 # for html, I may remove it
@@ -85,7 +82,7 @@ class HtmlHandler(RequestHandler):
 	def get(self, title : str):
 		try:
 			path_raw = analyze(str(title), GMRAW)
-			path_src = ROOT + "/src_cache/" + str(title) + ".html"
+			path_src = ROOT + "src_cache/" + str(title) + ".html"
 			if (not os.path.isfile(path_src)) or (os.path.getmtime(path_src) < os.path.getmtime(path_raw)):
 				with open(path_raw, "r") as handle:
 					raw = handle.read().replace("\t", "    ") # TODO
