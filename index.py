@@ -26,9 +26,16 @@ else:
 def transparent(s):
 	return s.startswith("_") and s.endswith("_")
 
-class Unimplement(Exception): pass
-class NoSuchFile(Exception): pass
+class Unimplement(Exception):
+	def __str__(self):
+		return f"functionality unimplement yet"
 
+class NoSuchFile(Exception):
+	def __init__(self, name):
+		self.name = name
+		super().__init__("no file named " + str(self.name))
+
+# !!!! full name is not full name
 def analyze(full_name : str, directory : str, root = ROOT, file = ".gm", ext = ".gm") -> str:
 	"""
 	"gm.h.group" ⇒ "./gm/h/_/group/.gm"
@@ -40,40 +47,32 @@ def analyze(full_name : str, directory : str, root = ROOT, file = ".gm", ext = "
 	# print("location", location)
 
 	if os.path.isfile(os.path.join(path, location + ext)):
+		# + I guess this functionality is wrong, only work for theorem
 		if len(locations) > 1:
-			raise Unimplement("unimplement!")
+			raise Unimplement()
 		return os.path.join(path, location + ext)
 
 	if os.path.isdir(os.path.join(path, location)):
 		return analyze(".".join(locations[1:]), os.path.join(path, location), root)
 
 	for item in filter(transparent, [filepath for filepath in os.listdir(directory)]):
-		# print("transpart item: ", item)
 		try:
 			return analyze(full_name, os.path.join(path, item), root)
-		except Unimplement as e:
-			raise Unimplement(e)
+		except Unimplement:
+			eprint("Unimplement")
+			raise Unimplement()
 		except NoSuchFile:
 			pass
 		except Exception as e:
 			raise Exception(e)
 
-	raise NoSuchFile("no such file")
+	raise NoSuchFile(full_name)
 
 class RawHandler(RequestHandler):
 	def get(self, title : str):
 		try:
 			with open(analyze(str(title), GMRAW), "r") as handle:
 				self.write(handle.read().replace("\t", "    ")) # TODO)
-		except Exception as e:
-			self.write(str(e))
-
-class TimeHandler(RequestHandler):
-	def get(self, title : str):
-		try:
-			self.write(
-				str(os.path.getmtime(analyze(str(title), GMRAW)))
-			)
 		except Exception as e:
 			self.write(str(e))
 
@@ -97,7 +96,6 @@ class HtmlHandler(RequestHandler):
 def make_app():
 	return Application(handlers=[
 		(r"/([\w-][\.\w-]*)", RawHandler),
-		(r"/([\w-][\.\w-]*)/time", TimeHandler),
 		(r"/([\w-][\.\w-]*)/html", HtmlHandler),
 	])
 
