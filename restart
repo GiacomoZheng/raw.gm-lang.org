@@ -11,3 +11,4 @@ rm -rf src_cache
 mkdir src_cache
 
 ./update
+./start

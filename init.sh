@@ -9,7 +9,6 @@ then
 fi
 root=$(pwd)
 
-cd $root
 if [[ -d pygments_gm ]]
 then
 	cd pygments_gm
@@ -43,12 +42,7 @@ if [[ $OSTYPE == linux-gnu* ]]
 then 
 	# shebang
 	cd $root
-	sudo chmod +x start
-	sudo chmod +x stop
-	sudo chmod +x update
-	sudo chmod +x restart
-	sudo chmod +x status
-	sudo chmod +x run
+	sudo chmod +x start stop update restart status run
 
 	sudo cp $root/raw.service /etc/systemd/system/raw.service
 	sudo systemctl daemon-reload

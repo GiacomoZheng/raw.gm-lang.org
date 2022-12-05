@@ -59,7 +59,7 @@ def analyze(full_name : str, directory : str, root = ROOT, file = ".gm", ext = "
 		try:
 			return analyze(full_name, os.path.join(path, item), root)
 		except Unimplement:
-			eprint("Unimplement")
+			print("Unimplement")
 			raise Unimplement()
 		except NoSuchFile:
 			pass
@@ -76,7 +76,6 @@ class RawHandler(RequestHandler):
 		except Exception as e:
 			self.write(str(e))
 
-# for html, I may remove it
 class HtmlHandler(RequestHandler):
 	def get(self, title : str):
 		try:

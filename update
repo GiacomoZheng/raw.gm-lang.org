@@ -23,8 +23,4 @@ if [[ $OSTYPE == linux-gnu* ]]
 then 
 	sudo cp $root/raw.service /etc/systemd/system/raw.service
 	sudo systemctl daemon-reload
-	
-	sudo systemctl restart raw
-	sleep 1s
-	systemctl status raw
 fi
